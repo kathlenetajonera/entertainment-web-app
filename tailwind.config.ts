@@ -19,6 +19,9 @@ const config: Config = {
             spacing: {
                 8: '30px',
             },
+            gridTemplateColumns: {
+                fluid: 'repeat(auto-fit, minmax(16rem, 1fr))',
+            },
         },
     },
     plugins: [],
