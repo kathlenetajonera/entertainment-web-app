@@ -1,32 +1,52 @@
+import { ShowType } from '../types';
+import { extractData } from '../functions';
 import BookmarkButton from '@/_components/Icons/BookmarkButton';
 import MovieIcon from '@/_components/Icons/MovieIcon';
+import SeriesIcon from '@/_components/Icons/SeriesIcon';
 
-const TrendingCard = () => {
+type Props = {
+    data: ShowType;
+};
+
+const TrendingCard = ({ data }: Props) => {
+    const {
+        id,
+        showTitle,
+        backdrop_path,
+        releaseDate,
+        mediaType,
+        rating,
+        customConfig,
+    } = extractData(data);
+
     return (
-        <div className="w-[28rem] h-[14rem] p-6 mr-10 rounded-lg flex flex-col justify-between bg-[url('/images/sample-bg.jpg')] bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)]">
+        <div
+            key={id}
+            className={`w-[28rem] h-[14rem] p-6 mr-10 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)] shrink-0`}
+            style={{ backgroundImage: `url('${backdrop_path}')` }}
+        >
             <div className="ml-auto">
                 <BookmarkButton />
             </div>
 
             <div>
                 <div className="flex items-center">
-                    <p className="text-sm font-extralight">2019</p>
-                    <p className="flex items-center text-sm font-extralight px-2 before:content-['•'] before:pr-2 after:content-['•'] after:pl-2">
+                    <p className="text-sm font-extralight">{releaseDate}</p>
+                    <p className="flex items-center text-sm font-extralight capitalize px-2 before:content-['•'] before:pr-2 after:content-['•'] after:pl-2">
                         <span className="mr-2">
-                            <MovieIcon
-                                customConfig={{
-                                    width: 12,
-                                    height: 12,
-                                }}
-                            />
+                            {mediaType === 'movie' ? (
+                                <MovieIcon customConfig={customConfig} />
+                            ) : (
+                                <SeriesIcon customConfig={customConfig} />
+                            )}
                         </span>
-                        Movie
+                        {mediaType}
                     </p>
-                    <p className="text-sm font-extralight">PG</p>
+                    <p className="text-sm font-extralight">{rating}</p>
                 </div>
 
                 <div>
-                    <h2 className="text-xl">Beyond Earth</h2>
+                    <h2 className="text-xl">{showTitle}</h2>
                 </div>
             </div>
         </div>
