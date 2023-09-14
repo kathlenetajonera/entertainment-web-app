@@ -21,7 +21,7 @@ export default function RootLayout({
                 <div className="min-h-screen bg-dark">
                     <Navbar />
 
-                    <main className="min-h-screen ml-32 py-14 px-8 text-white">
+                    <main className="min-h-screen ml-32 py-14 px-8 text-white overflow-x-hidden">
                         {children}
                     </main>
                 </div>
