@@ -1,8 +1,9 @@
+import { ShowType } from '@/_components/Card/types';
 import { RootState } from '@/_redux/store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type BookmarkState = {
-    bookmarks: any[];
+    bookmarks: ShowType[];
 };
 
 const initialState: BookmarkState = {

@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from '@/_redux/hooks';
 import { selectBookmarks } from '@/_redux/features/bookmark/bookmarkSlice';
 import { ShowType } from './types';
@@ -33,11 +35,18 @@ const Card = ({ data }: Props) => {
     }, [bookmarks]);
 
     return (
-        <div key={id}>
+        <div key={id} className="group cursor-pointer">
             <div
-                className="h-[11rem] p-4 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)]"
-                style={{ backgroundImage: `url('${backdrop_path}')` }}
+                className="relative h-[11rem] p-4 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)]"
+                style={{
+                    backgroundImage: `url('${backdrop_path}')`,
+                }}
             >
+                <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-[rgba(0,0,0,0.2)] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <FontAwesomeIcon icon={faEye} size="lg" />
+                    <p className="ml-1 text-base">View</p>
+                </div>
+
                 <div className="ml-auto">
                     <BookmarkButton isBookmarked={isBookmarked} data={data} />
                 </div>

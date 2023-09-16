@@ -2,10 +2,11 @@
 
 import { setBookmarks } from '@/_redux/features/bookmark/bookmarkSlice';
 import { useAppDispatch } from '@/_redux/hooks';
+import { ShowType } from '../Card/types';
 
 type Props = {
     isBookmarked: boolean;
-    data: any;
+    data: ShowType;
 };
 
 const BookmarkButton = ({ isBookmarked, data }: Props) => {

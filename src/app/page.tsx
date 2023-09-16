@@ -1,4 +1,6 @@
-import { fetchTrendingShows } from '@/_services/DataService';
+import { fetchShows } from '@/_services/DataService';
+import constants from '@/constants';
+import { ShowType } from '@/_components/Card/types';
 import SectionTitle from '@/_components/Typography/SectionTitle';
 import SearchBar from '@/_components/SearchBar';
 import TextInput from '@/_components/TextInput';
@@ -7,7 +9,14 @@ import TrendingCard from '@/_components/Card/Trending';
 import Card from '@/_components/Card';
 
 export default async function Home() {
-    const trendingList = await fetchTrendingShows();
+    const trendingList = await fetchShows(
+        constants.ENDPOINTS.trendingMovies,
+        constants.ENDPOINTS.trendingSeries
+    );
+    const recommendedList = await fetchShows(
+        constants.ENDPOINTS.topRatedMovies,
+        constants.ENDPOINTS.topRatedSeries
+    );
 
     return (
         <div>
@@ -20,7 +29,7 @@ export default async function Home() {
                 <SectionTitle>Trending</SectionTitle>
 
                 <ListSlider className="mt-8 w-[calc(100%+2rem)]">
-                    {trendingList.map((item) => {
+                    {trendingList.map((item: ShowType) => {
                         return (
                             <div key={item.id}>
                                 <TrendingCard data={item} />
@@ -34,7 +43,7 @@ export default async function Home() {
                 <SectionTitle>Recommended for you</SectionTitle>
 
                 <div className="grid grid-cols-fluid gap-10 mt-8">
-                    {trendingList.map((item) => {
+                    {recommendedList.map((item: ShowType) => {
                         return <Card key={item.id} data={item} />;
                     })}
                 </div>

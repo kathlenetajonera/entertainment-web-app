@@ -2,6 +2,7 @@
 
 import { useAppSelector } from '@/_redux/hooks';
 import { selectBookmarks } from '@/_redux/features/bookmark/bookmarkSlice';
+import { ShowType } from '@/_components/Card/types';
 import SearchBar from '@/_components/SearchBar';
 import TextInput from '@/_components/TextInput';
 import SectionTitle from '@/_components/Typography/SectionTitle';
@@ -28,7 +29,7 @@ function Bookmarks() {
                     <SectionTitle>Bookmarked Movies</SectionTitle>
 
                     <div className="grid grid-cols-fluid gap-10 mt-8">
-                        {bookmarkedMovies.map((item: any) => (
+                        {bookmarkedMovies.map((item: ShowType) => (
                             <Card key={item.id} data={item} />
                         ))}
                     </div>
@@ -39,7 +40,7 @@ function Bookmarks() {
                     <SectionTitle>Bookmarked TV Series</SectionTitle>
 
                     <div className="grid grid-cols-fluid gap-10 mt-8">
-                        {bookmarkedSeries.map((item: any) => (
+                        {bookmarkedSeries.map((item: ShowType) => (
                             <Card key={item.id} data={item} />
                         ))}
                     </div>

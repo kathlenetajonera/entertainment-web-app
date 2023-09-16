@@ -16,7 +16,7 @@ export function extractData(data: ShowType) {
     const releaseDate = release_date
         ? release_date.split('-')[0]
         : first_air_date?.split('-')[0];
-    const mediaType = media_type === 'tv' ? 'TV Series' : media_type;
+    const mediaType = media_type === 'tv' ? 'TV' : media_type;
     const rating = adult ? '18+' : 'PG';
 
     const customConfig = {
