@@ -17,7 +17,7 @@ const ListSlider = ({ children, className }: Props) => {
         return (
             <div
                 onClick={onClick}
-                className={`absolute top-0 right-0 z-10 bg-[rgba(0,0,0,0.4)] h-full px-8 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-in cursor-pointer hover:opacity-100`}
+                className={`absolute top-0 right-0 z-10 bg-gradient-to-l from-[rgba(0,0,0,0.6)] h-full px-10 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-in cursor-pointer hover:opacity-100`}
             >
                 <FontAwesomeIcon icon={faAngleRight} size="2xl" />
             </div>
@@ -30,7 +30,7 @@ const ListSlider = ({ children, className }: Props) => {
         return (
             <div
                 onClick={onClick}
-                className={`absolute top-0 left-0 z-10 bg-[rgba(0,0,0,0.4)] h-full px-8 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-in cursor-pointer hover:opacity-100`}
+                className={`absolute top-0 left-0 z-10 bg-gradient-to-r from-[rgba(0,0,0,0.6)] h-full px-10 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-in cursor-pointer hover:opacity-100`}
             >
                 <FontAwesomeIcon icon={faAngleLeft} size="2xl" />
             </div>

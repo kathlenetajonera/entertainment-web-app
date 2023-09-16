@@ -1,3 +1,8 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '@/_redux/hooks';
+import { selectBookmarks } from '@/_redux/features/bookmark/bookmarkSlice';
 import { ShowType } from './types';
 import { extractData } from './functions';
 import BookmarkButton from '@/_components/Icons/BookmarkButton';
@@ -9,6 +14,9 @@ type Props = {
 };
 
 const Card = ({ data }: Props) => {
+    const bookmarks = useAppSelector(selectBookmarks);
+    const [isBookmarked, setIsBookmarked] = useState(false);
+
     const {
         id,
         showTitle,
@@ -19,6 +27,11 @@ const Card = ({ data }: Props) => {
         customConfig,
     } = extractData(data);
 
+    useEffect(() => {
+        const bookmarked = bookmarks.find((item) => item.id === data.id);
+        setIsBookmarked(Boolean(bookmarked));
+    }, [bookmarks]);
+
     return (
         <div key={id}>
             <div
@@ -26,7 +39,7 @@ const Card = ({ data }: Props) => {
                 style={{ backgroundImage: `url('${backdrop_path}')` }}
             >
                 <div className="ml-auto">
-                    <BookmarkButton />
+                    <BookmarkButton isBookmarked={isBookmarked} data={data} />
                 </div>
             </div>
             <div className="mt-2">
@@ -45,7 +58,7 @@ const Card = ({ data }: Props) => {
                     <p className="text-xs font-extralight">{rating}</p>
                 </div>
 
-                <div>
+                <div className="mt-1">
                     <h2 className="text-lg">{showTitle}</h2>
                 </div>
             </div>

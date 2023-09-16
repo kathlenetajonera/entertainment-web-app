@@ -35,7 +35,7 @@ export default async function Home() {
 
                 <div className="grid grid-cols-fluid gap-10 mt-8">
                     {trendingList.map((item) => {
-                        return <Card data={item} />;
+                        return <Card key={item.id} data={item} />;
                     })}
                 </div>
             </div>
