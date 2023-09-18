@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -39,7 +38,11 @@ const Card = ({ data }: Props) => {
             <div
                 className="relative h-[11rem] p-4 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)]"
                 style={{
-                    backgroundImage: `url('${backdrop_path}')`,
+                    backgroundImage: backdrop_path.includes(
+                        'null' || 'undefined'
+                    )
+                        ? `url('/images/placeholder.png')`
+                        : `url('${backdrop_path}')`,
                 }}
             >
                 <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-[rgba(0,0,0,0.2)] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">

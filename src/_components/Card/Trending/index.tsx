@@ -38,7 +38,11 @@ const TrendingCard = ({ data }: Props) => {
         <div
             key={id}
             className={`relative w-[28rem] h-[14rem] p-6 mr-10 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)] shrink-0 cursor-pointer`}
-            style={{ backgroundImage: `url('${backdrop_path}')` }}
+            style={{
+                backgroundImage: backdrop_path.includes('null' || 'undefined')
+                    ? `url('/images/placeholder.png')`
+                    : `url('${backdrop_path}')`,
+            }}
         >
             <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-[rgba(0,0,0,0.2)] flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
                 <FontAwesomeIcon icon={faEye} size="lg" />

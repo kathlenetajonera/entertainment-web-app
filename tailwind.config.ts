@@ -18,12 +18,13 @@ const config: Config = {
             },
             backgroundImage: {
                 dropdown: `url('/images/icon-angle-down.svg')`,
+                placeholder: `url('/images/placeholder.png')`,
             },
             spacing: {
                 8: '30px',
             },
             gridTemplateColumns: {
-                fluid: 'repeat(auto-fit, minmax(16rem, 1fr))',
+                fluid: 'repeat(auto-fill, minmax(16rem, 1fr))',
             },
         },
     },

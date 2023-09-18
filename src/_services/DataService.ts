@@ -85,3 +85,40 @@ export async function fetchGenres(endpoint: string) {
 
     return [];
 }
+
+export async function fetchSearchResults(keyword: string, category: string) {
+    const configRes = await networkRequest(constants.ENDPOINTS.configuration);
+    let imageUrlTemplate = 'https://image.tmdb.org/t/p/w780';
+
+    if (configRes?.images) {
+        const { secure_base_url, backdrop_sizes } = configRes.images;
+        imageUrlTemplate = `${secure_base_url}${backdrop_sizes[1]}`;
+    }
+
+    let endpoint = constants.ENDPOINTS.search;
+
+    if (category === 'movie') {
+        endpoint = constants.ENDPOINTS.searchMovies;
+    } else if (category === 'tv') {
+        endpoint = constants.ENDPOINTS.searchSeries;
+    }
+
+    const url = endpoint + keyword;
+    const res = await networkRequest(url);
+
+    if (res?.results) {
+        const data = res.results
+            .filter((item: ShowType) => item.media_type !== 'person')
+            .map((item: ShowType) => ({
+                ...item,
+                backdrop_path: `${imageUrlTemplate}${
+                    item.backdrop_path || item.poster_path
+                }`,
+                media_type: item.media_type || category,
+            }));
+
+        return data;
+    }
+
+    return [];
+}

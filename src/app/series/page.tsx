@@ -11,6 +11,7 @@ async function Series() {
     return (
         <div>
             <SearchBar
+                category="tv"
                 placeholder="Search for series"
                 filterDropdown={genres}
             />
