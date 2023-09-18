@@ -1,21 +1,25 @@
 import constants from '@/constants';
-import { fetchList } from '@/_services/DataService';
+import { fetchGenres, fetchList } from '@/_services/DataService';
 import SearchBar from '@/_components/SearchBar';
 import Section from '@/_components/Section';
 
 async function Movies() {
     const popularMovies = await fetchList(constants.ENDPOINTS.popularMovies);
-    const nowPlayingMovies = await fetchList(
-        constants.ENDPOINTS.nowPlayingMovies
-    );
     const upcomingMovies = await fetchList(constants.ENDPOINTS.upcomingMovies);
+    const genres = await fetchGenres(constants.ENDPOINTS.movieGenres);
 
     return (
         <div>
-            <SearchBar placeholder="Search for movies" />
-            <Section title="Popular" list={popularMovies} />
-            <Section title="Now Playing" list={nowPlayingMovies} />
-            <Section title="Upcoming" list={upcomingMovies} />
+            <SearchBar
+                placeholder="Search for movies"
+                filterDropdown={genres}
+            />
+            <Section
+                title="Popular Movies"
+                list={popularMovies}
+                customClass="mt-5"
+            />
+            <Section title="Upcoming Movies" list={upcomingMovies} />
         </div>
     );
 }

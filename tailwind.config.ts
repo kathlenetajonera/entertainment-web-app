@@ -16,6 +16,9 @@ const config: Config = {
                 dark: '#10141f',
                 navbar: '#161d2f',
             },
+            backgroundImage: {
+                dropdown: `url('/images/icon-angle-down.svg')`,
+            },
             spacing: {
                 8: '30px',
             },

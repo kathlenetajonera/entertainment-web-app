@@ -5,11 +5,12 @@ import SectionTitle from '../Typography/SectionTitle';
 type Props = {
     title: string;
     list: ShowType[];
+    customClass?: string;
 };
 
-const Section = ({ title, list }: Props) => {
+const Section = ({ title, list, customClass }: Props) => {
     return (
-        <div className="mt-10">
+        <div className={customClass || 'mt-12'}>
             <SectionTitle>{title}</SectionTitle>
 
             <div className="grid grid-cols-fluid gap-10 mt-8">

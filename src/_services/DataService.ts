@@ -14,8 +14,12 @@ export async function fetchShows(
         imageUrlTemplate = `${secure_base_url}${backdrop_sizes[1]}`;
     }
 
-    const { results: resMovies } = (await networkRequest(movieEndpoint)) || [];
-    const { results: resSeries } = (await networkRequest(seriesEndpoint)) || [];
+    const moviesUrl =
+        movieEndpoint + '?language=en-US&with_original_language=en&region=PH';
+    const seriesUrl =
+        seriesEndpoint + '?language=en-US&with_original_language=en&region=PH';
+    const { results: resMovies } = await networkRequest(moviesUrl);
+    const { results: resSeries } = await networkRequest(seriesUrl);
 
     const movies = resMovies.map((item: ShowType) => ({
         ...item,
@@ -27,9 +31,7 @@ export async function fetchShows(
     }));
 
     if (movies || series) {
-        const shows = movies
-            ?.concat(series)
-            ?.filter((item: ShowType) => item.original_language === 'en');
+        const shows = movies?.concat(series);
         const sortedList = shows.sort(
             (a: ShowType, b: ShowType) => b.vote_average - a.vote_average
         );
@@ -54,15 +56,31 @@ export async function fetchList(endpoint: string) {
         imageUrlTemplate = `${secure_base_url}${backdrop_sizes[1]}`;
     }
 
-    const res = await networkRequest(endpoint);
+    const url =
+        endpoint + '?language=en-US&with_original_language=en&region=PH';
+    const res = await networkRequest(url);
 
     if (res?.results) {
         const data = res.results.map((item: ShowType) => ({
             ...item,
-            backdrop_path: `${imageUrlTemplate}${item.backdrop_path}`,
+            backdrop_path: `${imageUrlTemplate}${
+                item.backdrop_path || item.poster_path
+            }`,
+            media_type: endpoint.includes('movie') ? 'movie' : 'tv',
         }));
 
         return data;
+    }
+
+    return [];
+}
+
+export async function fetchGenres(endpoint: string) {
+    const url = endpoint + '?language=en-US';
+    const res = await networkRequest(url);
+
+    if (res?.genres) {
+        return res?.genres;
     }
 
     return [];
