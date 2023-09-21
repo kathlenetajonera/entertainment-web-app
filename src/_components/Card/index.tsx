@@ -1,9 +1,7 @@
-'use client';
-import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { getPlaiceholder } from 'plaiceholder';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { useAppSelector } from '@/_redux/hooks';
-import { selectBookmarks } from '@/_redux/features/bookmark/bookmarkSlice';
 import { ShowType } from './types';
 import { extractData } from './functions';
 import BookmarkButton from '@/_components/Icons/BookmarkButton';
@@ -14,10 +12,23 @@ type Props = {
     data: ShowType;
 };
 
-const Card = ({ data }: Props) => {
-    const bookmarks = useAppSelector(selectBookmarks);
-    const [isBookmarked, setIsBookmarked] = useState(false);
+export async function getImage(src: string) {
+    const buffer = await fetch(src).then(async (res) =>
+        Buffer.from(await res.arrayBuffer())
+    );
 
+    const {
+        metadata: { height, width },
+        ...plaiceholder
+    } = await getPlaiceholder(buffer, { size: 10 });
+
+    return {
+        ...plaiceholder,
+        img: { src, height, width },
+    };
+}
+
+const Card = async ({ data }: Props) => {
     const {
         id,
         showTitle,
@@ -28,30 +39,32 @@ const Card = ({ data }: Props) => {
         customConfig,
     } = extractData(data);
 
-    useEffect(() => {
-        const bookmarked = bookmarks.find((item) => item.id === data.id);
-        setIsBookmarked(Boolean(bookmarked));
-    }, [bookmarks]);
+    const imageUrl = backdrop_path.includes('null' || 'undefined')
+        ? `/images/placeholder.png`
+        : `${backdrop_path}`;
+    const { base64 } = await getImage(imageUrl);
 
     return (
         <div key={id} className="group cursor-pointer">
-            <div
-                className="relative h-[11rem] p-4 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)]"
-                style={{
-                    backgroundImage: backdrop_path.includes(
-                        'null' || 'undefined'
-                    )
-                        ? `url('/images/placeholder.png')`
-                        : `url('${backdrop_path}')`,
-                }}
-            >
+            <div className="relative h-[11rem] p-4 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)]">
+                <Image
+                    src={imageUrl}
+                    width={780}
+                    height={439}
+                    className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+                    alt={showTitle || ''}
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL={base64}
+                />
+
                 <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-[rgba(0,0,0,0.2)] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <FontAwesomeIcon icon={faEye} size="lg" />
                     <p className="ml-1 text-base">View</p>
                 </div>
 
                 <div className="ml-auto">
-                    <BookmarkButton isBookmarked={isBookmarked} data={data} />
+                    <BookmarkButton id={data.id} data={data} />
                 </div>
             </div>
             <div className="mt-2">

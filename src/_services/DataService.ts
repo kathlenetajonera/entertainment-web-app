@@ -119,7 +119,6 @@ export async function fetchSearchResults(
     const url =
         endpoint +
         '&language=en-US&with_original_language=en&region=PH&include_adult=false';
-    console.log(url);
 
     const res = await networkRequest(url);
 

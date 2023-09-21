@@ -1,20 +1,30 @@
 'use client';
-
-import { setBookmarks } from '@/_redux/features/bookmark/bookmarkSlice';
-import { useAppDispatch } from '@/_redux/hooks';
+import { useEffect, useState } from 'react';
+import {
+    selectBookmarks,
+    setBookmarks,
+} from '@/_redux/features/bookmark/bookmarkSlice';
+import { useAppDispatch, useAppSelector } from '@/_redux/hooks';
 import { ShowType } from '../Card/types';
 
 type Props = {
-    isBookmarked: boolean;
+    id: number;
     data: ShowType;
 };
 
-const BookmarkButton = ({ isBookmarked, data }: Props) => {
+const BookmarkButton = ({ id, data }: Props) => {
     const dispatch = useAppDispatch();
+    const bookmarks = useAppSelector(selectBookmarks);
+    const [isBookmarked, setIsBookmarked] = useState(false);
 
     const handleBookmark = () => {
         dispatch(setBookmarks(data));
     };
+
+    useEffect(() => {
+        const bookmarked = bookmarks.find((item) => item.id === id);
+        setIsBookmarked(Boolean(bookmarked));
+    }, [bookmarks]);
 
     return (
         <div
