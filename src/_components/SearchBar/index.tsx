@@ -33,6 +33,16 @@ const SearchBar = ({
         }
     };
 
+    const handleFilter = (e: any) => {
+        const { value } = e.target;
+        const genreName = filterDropdown?.find(
+            (item) => item.id === parseInt(value)
+        )?.name;
+        const url = `/search?category=${category}&genre=${genreName}&genre_id=${value}`;
+
+        router.push(url);
+    };
+
     useEffect(() => {
         if (initialValue) setKeyword(initialValue);
     }, [initialValue]);
@@ -62,7 +72,10 @@ const SearchBar = ({
             </div>
 
             {filterDropdown && (
-                <select className="appearance-none w-48 h-4/5 bg-dark bg-dropdown bg-no-repeat bg-[center_right_0.9rem] bg-[length:0.9rem] text-white px-4 border-[1px] border-white outline-none rounded-md">
+                <select
+                    className="appearance-none w-48 h-4/5 bg-dark bg-dropdown bg-no-repeat bg-[center_right_0.9rem] bg-[length:0.9rem] text-white px-4 border-[1px] border-white outline-none rounded-md"
+                    onChange={handleFilter}
+                >
                     <option value="">Genres</option>
                     {filterDropdown.map(({ id, name }) => (
                         <option key={id} value={id}>

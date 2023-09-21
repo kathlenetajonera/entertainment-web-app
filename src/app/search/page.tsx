@@ -9,7 +9,17 @@ type Props = {
 async function Search({ searchParams }: Props) {
     const keyword = searchParams?.query;
     const category = searchParams?.category;
-    const results = await fetchSearchResults(keyword || '', category || '');
+    const genre = searchParams?.genre_id;
+    const genreName = searchParams?.genre;
+    const results = await fetchSearchResults(
+        keyword || '',
+        category || '',
+        genre || ''
+    );
+
+    const title = keyword
+        ? `Found ${results.length} results for ${keyword}`
+        : `${genreName} ${category === 'tv' ? 'TV Shows' : 'Movies'}`;
 
     return (
         <div>
@@ -19,10 +29,7 @@ async function Search({ searchParams }: Props) {
             />
 
             {results.length > 0 && (
-                <Section
-                    title={`Found ${results.length} results for ${keyword}`}
-                    list={results}
-                />
+                <Section title={title} list={results} customClass="mt-5" />
             )}
         </div>
     );

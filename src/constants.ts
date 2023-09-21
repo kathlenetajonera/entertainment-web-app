@@ -5,6 +5,8 @@ export default {
         search: 'search/multi?query=',
         searchMovies: 'search/movie?query=',
         searchSeries: 'search/tv?query=',
+        fetchMoviesByGenre: 'discover/movie?with_genres=',
+        fetchSeriesByGenre: 'discover/tv?with_genres=',
 
         movieGenres: 'genre/movie/list',
         trendingMovies: 'trending/movie/day',

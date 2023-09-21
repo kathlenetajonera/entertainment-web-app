@@ -57,7 +57,8 @@ export async function fetchList(endpoint: string) {
     }
 
     const url =
-        endpoint + '?language=en-US&with_original_language=en&region=PH';
+        endpoint +
+        '?language=en-US&with_original_language=en&region=PH&include_adult=false';
     const res = await networkRequest(url);
 
     if (res?.results) {
@@ -86,7 +87,11 @@ export async function fetchGenres(endpoint: string) {
     return [];
 }
 
-export async function fetchSearchResults(keyword: string, category: string) {
+export async function fetchSearchResults(
+    keyword: string,
+    category: string,
+    genreId?: string
+) {
     const configRes = await networkRequest(constants.ENDPOINTS.configuration);
     let imageUrlTemplate = 'https://image.tmdb.org/t/p/w780';
 
@@ -95,15 +100,27 @@ export async function fetchSearchResults(keyword: string, category: string) {
         imageUrlTemplate = `${secure_base_url}${backdrop_sizes[1]}`;
     }
 
-    let endpoint = constants.ENDPOINTS.search;
+    const endpoints = {
+        multiSearch: constants.ENDPOINTS.search + keyword,
+        movieGenre: constants.ENDPOINTS.fetchMoviesByGenre + genreId,
+        movieSearch: constants.ENDPOINTS.searchMovies + keyword,
+        tvGenre: constants.ENDPOINTS.fetchSeriesByGenre + genreId,
+        tvSearch: constants.ENDPOINTS.searchSeries + keyword,
+    };
+
+    let endpoint = endpoints.multiSearch;
 
     if (category === 'movie') {
-        endpoint = constants.ENDPOINTS.searchMovies;
+        endpoint = genreId ? endpoints.movieGenre : endpoints.movieSearch;
     } else if (category === 'tv') {
-        endpoint = constants.ENDPOINTS.searchSeries;
+        endpoint = genreId ? endpoints.tvGenre : endpoints.tvSearch;
     }
 
-    const url = endpoint + keyword;
+    const url =
+        endpoint +
+        '&language=en-US&with_original_language=en&region=PH&include_adult=false';
+    console.log(url);
+
     const res = await networkRequest(url);
 
     if (res?.results) {
