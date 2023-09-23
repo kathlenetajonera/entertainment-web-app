@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { getPlaiceholder } from 'plaiceholder';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { getImagePlaceholder } from '@/_services/DataService';
 import { ShowType } from './types';
 import { extractData } from './functions';
 import BookmarkButton from '@/_components/Icons/BookmarkButton';
@@ -11,22 +11,6 @@ import SeriesIcon from '../Icons/SeriesIcon';
 type Props = {
     data: ShowType;
 };
-
-export async function getImage(src: string) {
-    const buffer = await fetch(src).then(async (res) =>
-        Buffer.from(await res.arrayBuffer())
-    );
-
-    const {
-        metadata: { height, width },
-        ...plaiceholder
-    } = await getPlaiceholder(buffer, { size: 10 });
-
-    return {
-        ...plaiceholder,
-        img: { src, height, width },
-    };
-}
 
 const Card = async ({ data }: Props) => {
     const {
@@ -42,7 +26,7 @@ const Card = async ({ data }: Props) => {
     const imageUrl = backdrop_path.includes('null' || 'undefined')
         ? `/images/placeholder.png`
         : `${backdrop_path}`;
-    const { base64 } = await getImage(imageUrl);
+    const { base64 } = await getImagePlaceholder(imageUrl);
 
     return (
         <div key={id} className="group cursor-pointer">
