@@ -5,7 +5,7 @@ function Loading() {
     const pathname = usePathname();
 
     return (
-        <div className="animate-pulse overflow-x-hidden">
+        <div className="animate-pulse lg:mt-28">
             <div className="w-full bg-navbar h-[3.125rem] rounded-md"></div>
 
             {pathname === '/' && (

@@ -21,7 +21,7 @@ export default async function Home() {
         <div>
             <SearchBar placeholder="Search for movies or TV series" />
 
-            <div className="mt-5">
+            <div className="mt-5 lg:mt-28">
                 <SectionTitle>Trending</SectionTitle>
 
                 <ListSlider className="mt-8 w-[calc(100%+1.9rem)]">

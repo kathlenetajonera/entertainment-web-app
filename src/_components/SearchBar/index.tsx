@@ -48,7 +48,11 @@ const SearchBar = ({
     }, [initialValue]);
 
     return (
-        <div className="bg-dark flex justify-between items-center sticky top-0 w-[calc(100%+1.9rem)] h-[3.125rem] pr-[1.9rem] z-50">
+        <div
+            className={`bg-dark flex justify-between items-center relative top-0 w-[calc(100%+1.9rem)] h-[3.125rem] pr-[1.9rem] z-50
+            lg:pr-0 lg:w-full lg:top-24
+            `}
+        >
             <div className="flex grow items-center">
                 <div className="mr-8">
                     <Image

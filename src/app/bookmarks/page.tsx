@@ -17,10 +17,18 @@ function Bookmarks() {
     return bookmarkedMovies.length > 0 || bookmarkedSeries.length > 0 ? (
         <>
             {bookmarkedMovies.length > 0 && (
-                <Section title="Bookmarked Movies" list={bookmarkedMovies} />
+                <Section
+                    title="Bookmarked Movies"
+                    list={bookmarkedMovies}
+                    customClass="lg:mt-28"
+                />
             )}
             {bookmarkedSeries.length > 0 && (
-                <Section title="Bookmarked TV Series" list={bookmarkedSeries} />
+                <Section
+                    title="Bookmarked TV Series"
+                    list={bookmarkedSeries}
+                    customClass="lg:mt-28"
+                />
             )}
         </>
     ) : (

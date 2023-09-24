@@ -30,7 +30,11 @@ async function Search({ searchParams }: Props) {
             />
 
             {results.length > 0 ? (
-                <Section title={title} list={results} customClass="mt-5" />
+                <Section
+                    title={title}
+                    list={results}
+                    customClass="mt-5 lg:mt-28"
+                />
             ) : (
                 <EmptyPlaceholder label={`No search results for: ${keyword}`} />
             )}
