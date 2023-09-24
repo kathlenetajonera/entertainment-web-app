@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +12,8 @@ type Props = {
 };
 
 const ListSlider = ({ children, className }: Props) => {
+    const [hasLoaded, setHasLoaded] = useState(false);
+
     const CustomNextArrow = (props: any) => {
         const { onClick } = props;
 
@@ -47,10 +50,27 @@ const ListSlider = ({ children, className }: Props) => {
         nextArrow: <CustomNextArrow />,
     };
 
-    return (
+    useEffect(() => {
+        setHasLoaded(true);
+    }, []);
+
+    return hasLoaded ? (
         <Slider {...config} className={className || ''}>
             {children}
         </Slider>
+    ) : (
+        <>
+            <div className="flex mt-8 w-[calc(100%+1.9rem)] mt-5 mb-14">
+                {...Array(3)
+                    .fill(0)
+                    .map((_, index) => (
+                        <div
+                            key={index}
+                            className="w-[28rem] h-[14rem] mr-10 rounded-lg bg-navbar"
+                        ></div>
+                    ))}
+            </div>
+        </>
     );
 };
 

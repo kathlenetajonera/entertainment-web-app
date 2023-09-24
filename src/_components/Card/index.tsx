@@ -4,6 +4,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { getImagePlaceholder } from '@/_services/DataService';
 import { ShowType } from './types';
 import { extractData } from './functions';
+import imagePlaceholder from '../../../public/images/placeholder.png';
 import BookmarkButton from '@/_components/Icons/BookmarkButton';
 import MovieIcon from '@/_components/Icons/MovieIcon';
 import SeriesIcon from '../Icons/SeriesIcon';
@@ -23,10 +24,14 @@ const Card = async ({ data }: Props) => {
         customConfig,
     } = extractData(data);
 
-    const imageUrl = backdrop_path.includes('null' || 'undefined')
-        ? `/images/placeholder.png`
-        : `${backdrop_path}`;
-    const { base64 } = await getImagePlaceholder(imageUrl);
+    const hasImage = !backdrop_path.includes('null' || 'undefined');
+    const imageUrl = hasImage ? `${backdrop_path}` : imagePlaceholder;
+    let base64Url;
+
+    if (hasImage) {
+        const { base64 } = await getImagePlaceholder(imageUrl as string);
+        base64Url = base64;
+    }
 
     return (
         <div key={id} className="group cursor-pointer">
@@ -39,7 +44,7 @@ const Card = async ({ data }: Props) => {
                     alt={showTitle || ''}
                     loading="lazy"
                     placeholder="blur"
-                    blurDataURL={base64}
+                    blurDataURL={base64Url}
                 />
 
                 <div className="absolute top-0 left-0 w-full h-full rounded-lg bg-[rgba(0,0,0,0.2)] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">

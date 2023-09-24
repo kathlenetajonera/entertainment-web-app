@@ -21,7 +21,7 @@ const config: Config = {
                 placeholder: `url('/images/placeholder.png')`,
             },
             spacing: {
-                8: '30px',
+                8: '1.875rem',
             },
             gridTemplateColumns: {
                 fluid: 'repeat(auto-fill, minmax(16rem, 1fr))',
