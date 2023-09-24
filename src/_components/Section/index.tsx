@@ -13,7 +13,7 @@ const Section = ({ title, list, customClass }: Props) => {
         <div className={customClass || 'mt-12'}>
             <SectionTitle>{title}</SectionTitle>
 
-            <div className="grid grid-cols-fluid gap-10 mt-8">
+            <div className="grid grid-cols-fluid gap-10 mt-8 md:mt-6 md:gap-6">
                 {list.map((item: ShowType) => {
                     return <Card key={item.id} data={item} />;
                 })}

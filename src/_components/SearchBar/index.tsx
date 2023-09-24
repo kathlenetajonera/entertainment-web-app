@@ -49,12 +49,13 @@ const SearchBar = ({
 
     return (
         <div
-            className={`bg-dark flex justify-between items-center relative top-0 w-[calc(100%+1.9rem)] h-[3.125rem] pr-[1.9rem] z-50
-            lg:pr-0 lg:w-full lg:top-24
+            className={`bg-dark flex justify-between items-center sticky top-0 w-[calc(100%+1.9rem)] h-[3.125rem] pr-[1.9rem] z-50
+            lg:relative lg:pr-0 lg:w-full lg:top-24
+            md:top-16 md:mt-4
             `}
         >
             <div className="flex grow items-center">
-                <div className="mr-8">
+                <div className="mr-8 md:mr-4">
                     <Image
                         src="/images/icon-search.svg"
                         alt="Search"
@@ -77,7 +78,7 @@ const SearchBar = ({
 
             {filterDropdown && (
                 <select
-                    className="appearance-none w-48 h-4/5 bg-dark bg-dropdown bg-no-repeat bg-[center_right_0.9rem] bg-[length:0.9rem] text-white px-4 border-[1px] border-white outline-none rounded-md"
+                    className="appearance-none w-48 h-4/5 bg-dark bg-dropdown bg-no-repeat bg-[center_right_0.9rem] bg-[length:0.9rem] text-white px-4 border-[1px] border-white outline-none rounded-md md:hidden"
                     onChange={handleFilter}
                 >
                     <option value="">Genres</option>

@@ -36,7 +36,9 @@ const TrendingCard = async ({ data }: Props) => {
     return (
         <div
             key={id}
-            className={`relative w-[28rem] h-[14rem] p-6 mr-10 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)] shrink-0 cursor-pointer`}
+            className={`relative w-[28rem] h-[14rem] p-6 mr-10 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)] shrink-0 cursor-pointer
+                md:w-[18rem] md:mr-6 md:h-[12rem]
+            `}
         >
             <Image
                 src={imageUrl}
