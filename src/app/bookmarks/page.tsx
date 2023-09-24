@@ -2,8 +2,8 @@
 
 import { useAppSelector } from '@/_redux/hooks';
 import { selectBookmarks } from '@/_redux/features/bookmark/bookmarkSlice';
-import SearchBar from '@/_components/SearchBar';
 import Section from '@/_components/Section';
+import EmptyPlaceholder from '@/_components/EmptyPlaceholder';
 
 function Bookmarks() {
     const bookmarks = useAppSelector(selectBookmarks);
@@ -14,17 +14,17 @@ function Bookmarks() {
         (item) => item.media_type === 'tv'
     );
 
-    return (
-        <div>
-            <SearchBar placeholder="Search bookmarks" />
-
+    return bookmarkedMovies.length > 0 || bookmarkedSeries.length > 0 ? (
+        <>
             {bookmarkedMovies.length > 0 && (
                 <Section title="Bookmarked Movies" list={bookmarkedMovies} />
             )}
             {bookmarkedSeries.length > 0 && (
                 <Section title="Bookmarked TV Series" list={bookmarkedSeries} />
             )}
-        </div>
+        </>
+    ) : (
+        <EmptyPlaceholder label="You have no bookmarks yet." />
     );
 }
 

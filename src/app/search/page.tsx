@@ -1,6 +1,7 @@
 import { fetchSearchResults } from '@/_services/DataService';
 import SearchBar from '@/_components/SearchBar';
 import Section from '@/_components/Section';
+import EmptyPlaceholder from '@/_components/EmptyPlaceholder';
 
 type Props = {
     searchParams: { [key: string]: string };
@@ -28,8 +29,10 @@ async function Search({ searchParams }: Props) {
                 placeholder="Search for movies or TV series"
             />
 
-            {results.length > 0 && (
+            {results.length > 0 ? (
                 <Section title={title} list={results} customClass="mt-5" />
+            ) : (
+                <EmptyPlaceholder label={`No search results for: ${keyword}`} />
             )}
         </div>
     );
