@@ -15,12 +15,16 @@ async function Movies() {
                 placeholder="Search for movies"
                 filterDropdown={genres}
             />
-            <Section
-                title="Popular Movies"
-                list={popularMovies}
-                customClass="mt-5"
-            />
-            <Section title="Upcoming Movies" list={upcomingMovies} />
+            {popularMovies.length > 0 && (
+                <Section
+                    title="Popular Movies"
+                    list={popularMovies}
+                    customClass="mt-5"
+                />
+            )}
+            {upcomingMovies.length > 0 && (
+                <Section title="Upcoming Movies" list={upcomingMovies} />
+            )}
         </div>
     );
 }

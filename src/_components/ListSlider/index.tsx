@@ -61,12 +61,12 @@ const ListSlider = ({ children, className }: Props) => {
     ) : (
         <>
             <div className="flex mt-8 w-[calc(100%+1.9rem)] mt-5 mb-14">
-                {...Array(3)
+                {...Array(4)
                     .fill(0)
                     .map((_, index) => (
                         <div
                             key={index}
-                            className="w-[28rem] h-[14rem] mr-10 rounded-lg bg-navbar"
+                            className="w-[28rem] h-[14rem] shrink-0 mr-10 rounded-lg bg-navbar"
                         ></div>
                     ))}
             </div>

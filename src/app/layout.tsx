@@ -3,6 +3,9 @@ import type { Metadata } from 'next';
 import { Outfit } from 'next/font/google';
 import { ReduxProvider } from '@/_redux/provider';
 import Navbar from '@/_components/Navbar';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+config.autoAddCss = false;
 
 const inter = Outfit({ subsets: ['latin'] });
 

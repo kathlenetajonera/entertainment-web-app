@@ -15,12 +15,16 @@ async function Series() {
                 placeholder="Search for series"
                 filterDropdown={genres}
             />
-            <Section
-                title="Popular TV Shows"
-                list={popularSeries}
-                customClass="mt-5"
-            />
-            <Section title="On-The-Air TV Shows" list={upcomingSeries} />
+            {popularSeries.length > 0 && (
+                <Section
+                    title="Popular TV Shows"
+                    list={popularSeries}
+                    customClass="mt-5"
+                />
+            )}
+            {upcomingSeries.length > 0 && (
+                <Section title="On-The-Air TV Shows" list={upcomingSeries} />
+            )}
         </div>
     );
 }
