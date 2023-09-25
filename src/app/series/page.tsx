@@ -19,7 +19,7 @@ async function Series() {
                 <Section
                     title="Popular TV Shows"
                     list={popularSeries}
-                    customClass="mt-5"
+                    customClass="mt-5 lg:mt-28 md:mt-24"
                 />
             )}
             {upcomingSeries.length > 0 && (

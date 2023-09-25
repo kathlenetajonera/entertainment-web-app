@@ -21,10 +21,10 @@ export default async function Home() {
         <div>
             <SearchBar placeholder="Search for movies or TV series" />
 
-            <div className="mt-5">
+            <div className="mt-5 lg:mt-28 md:mt-24">
                 <SectionTitle>Trending</SectionTitle>
 
-                <ListSlider className="mt-8 w-[calc(100%+1.9rem)]">
+                <ListSlider className="mt-8 w-[calc(100%+1.9rem)] md:w-[calc(100%+1.1rem)] md:mt-6">
                     {trendingList.map((item: ShowType) => {
                         return (
                             <div key={item.id}>

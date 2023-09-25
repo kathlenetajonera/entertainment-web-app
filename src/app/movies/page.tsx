@@ -19,7 +19,7 @@ async function Movies() {
                 <Section
                     title="Popular Movies"
                     list={popularMovies}
-                    customClass="mt-5"
+                    customClass="mt-5 lg:mt-28 md:mt-24"
                 />
             )}
             {upcomingMovies.length > 0 && (

@@ -5,7 +5,7 @@ function Loading() {
     const pathname = usePathname();
 
     return (
-        <div className="animate-pulse overflow-x-hidden">
+        <div className="animate-pulse lg:mt-28 md:mt-24">
             <div className="w-full bg-navbar h-[3.125rem] rounded-md"></div>
 
             {pathname === '/' && (
@@ -25,7 +25,7 @@ function Loading() {
             )}
 
             <div className={`w-64 h-[3.125rem] mt-5 bg-navbar`}></div>
-            <div className="grid grid-cols-fluid gap-10 mt-8">
+            <div className="grid grid-cols-fluid gap-10 mt-8 md:gap-6">
                 {...Array(20)
                     .fill(0)
                     .map((_, index) => (

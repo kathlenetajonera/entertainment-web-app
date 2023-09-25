@@ -7,7 +7,7 @@ type Props = {
 
 const EmptyPlaceholder = ({ label }: Props) => {
     return (
-        <div className="bg-navbar h-[calc(100vh-6rem)] flex flex-col items-center justify-center rounded-lg ">
+        <div className="bg-navbar h-[calc(100vh-6rem)] flex flex-col items-center justify-center rounded-lg lg:mt-28 lg:h-[calc(100vh-12rem)]">
             <div className="block">
                 <FontAwesomeIcon icon={faInbox} size="3x" color="#5A698F" />
             </div>
