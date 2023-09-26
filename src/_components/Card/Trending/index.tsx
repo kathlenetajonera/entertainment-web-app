@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { ShowType } from '../types';
@@ -24,7 +25,7 @@ const TrendingCard = async ({ data }: Props) => {
         customConfig,
     } = extractData(data);
 
-    const hasImage = !backdrop_path.includes('null' || 'undefined');
+    const hasImage = !backdrop_path?.includes('null' || 'undefined');
     const imageUrl = hasImage ? `${backdrop_path}` : imagePlaceholder;
     let base64Url;
 
@@ -34,7 +35,8 @@ const TrendingCard = async ({ data }: Props) => {
     }
 
     return (
-        <div
+        <Link
+            href={`/show/${id}?category=${mediaType}`}
             key={id}
             className={`relative w-[28rem] h-[14rem] p-6 mr-10 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)] shrink-0 cursor-pointer
                 md:w-[18rem] md:mr-6 md:h-[12rem]
@@ -80,7 +82,7 @@ const TrendingCard = async ({ data }: Props) => {
                     <h2 className="text-xl">{showTitle}</h2>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

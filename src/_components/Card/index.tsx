@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { getImagePlaceholder } from '@/_services/DataService';
@@ -11,9 +12,10 @@ import SeriesIcon from '../Icons/SeriesIcon';
 
 type Props = {
     data: ShowType;
+    hideBookmark?: boolean;
 };
 
-const Card = async ({ data }: Props) => {
+const Card = async ({ data, hideBookmark }: Props) => {
     const {
         id,
         showTitle,
@@ -24,7 +26,7 @@ const Card = async ({ data }: Props) => {
         customConfig,
     } = extractData(data);
 
-    const hasImage = !backdrop_path.includes('null' || 'undefined');
+    const hasImage = !backdrop_path?.includes('null' || 'undefined');
     const imageUrl = hasImage ? `${backdrop_path}` : imagePlaceholder;
     let base64Url;
 
@@ -34,7 +36,11 @@ const Card = async ({ data }: Props) => {
     }
 
     return (
-        <div key={id} className="group cursor-pointer">
+        <Link
+            href={`/show/${id}?category=${mediaType}`}
+            key={id}
+            className="group cursor-pointer"
+        >
             <div className="relative h-[11rem] p-4 rounded-lg flex flex-col justify-between bg-no-repeat bg-cover bg-blend-multiply bg-[rgba(0,0,0,0.1)]">
                 <Image
                     src={imageUrl}
@@ -52,9 +58,11 @@ const Card = async ({ data }: Props) => {
                     <p className="ml-1 text-base">View</p>
                 </div>
 
-                <div className="ml-auto">
-                    <BookmarkButton id={data.id} data={data} />
-                </div>
+                {!hideBookmark && (
+                    <div className="ml-auto">
+                        <BookmarkButton id={data.id} data={data} />
+                    </div>
+                )}
             </div>
             <div className="mt-2">
                 <div className="flex items-center">
@@ -76,7 +84,7 @@ const Card = async ({ data }: Props) => {
                     <h2 className="text-lg">{showTitle}</h2>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
