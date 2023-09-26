@@ -15,17 +15,17 @@ const NAV_ICONS = [
     },
     {
         key: 'movies',
-        href: 'movies',
+        href: '/movies',
         icon: <MovieIcon href="/movies" />,
     },
     {
         key: 'series',
-        href: 'series',
+        href: '/series',
         icon: <SeriesIcon href="/series" />,
     },
     {
         key: 'bookmark',
-        href: 'bookmarks',
+        href: '/bookmarks',
         icon: <BookmarkIcon href="/bookmarks" />,
     },
 ];

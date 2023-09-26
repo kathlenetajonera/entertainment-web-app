@@ -66,11 +66,11 @@ async function ShowPage({ params, searchParams }: Props) {
     const sharingIcons = [faFacebook, faTwitter, faInstagram];
 
     return (
-        <>
-            <div className="grid grid-cols-2">
+        <div className="max-w-[1536px] mx-auto">
+            <div className="grid grid-cols-2 lg:grid-cols-1 lg:mt-28">
                 <Image
                     src={imageUrl}
-                    alt={title}
+                    alt={title || name}
                     width={350}
                     height={525}
                     className="mx-auto h-full object-cover"
@@ -144,14 +144,14 @@ async function ShowPage({ params, searchParams }: Props) {
                 <div className="mt-12">
                     <h3 className="text-xl">More like this</h3>
 
-                    <div className="grid grid-cols-4 gap-10 mt-6 md:mt-6 md:gap-6">
+                    <div className="grid grid-cols-4 gap-10 mt-6 lg:grid-cols-2 md:grid-cols-1 md:gap-6">
                         {data.similar.map((data: ShowType) => (
                             <Card data={data} hideBookmark />
                         ))}
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 }
 
