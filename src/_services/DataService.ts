@@ -139,6 +139,62 @@ export async function fetchSearchResults(
     return [];
 }
 
+export async function fetchShow(id: string, category: string) {
+    const configRes = await networkRequest(constants.ENDPOINTS.configuration);
+    let imageUrlTemplate = 'https://image.tmdb.org/t/p/w780';
+
+    if (configRes?.images) {
+        const { secure_base_url, backdrop_sizes } = configRes.images;
+        imageUrlTemplate = `${secure_base_url}${backdrop_sizes[1]}`;
+    }
+
+    const url = `${category}/${id}`;
+    const creditsUrl = `${url}/credits`;
+    const similarUrl = `${url}/similar?language=en-US&with_original_language=en&region=PH&include_adult=false`;
+    const res = await networkRequest(url);
+    const creditsRes = await networkRequest(creditsUrl);
+    const similarRes = await networkRequest(similarUrl);
+
+    if (res) {
+        let data = {
+            ...res,
+            backdrop_path: `${imageUrlTemplate}${res.poster_path}`,
+        };
+
+        if (creditsRes) {
+            data = {
+                ...data,
+                credits: {
+                    cast: creditsRes.cast.slice(0, 3),
+                    crew: creditsRes.crew.filter(
+                        (c: ShowType) =>
+                            c.job === 'Director' || 'Executive Producer'
+                    ),
+                },
+            };
+        }
+
+        if (similarRes?.results) {
+            data = {
+                ...data,
+                similar: similarRes.results
+                    .slice(0, 4)
+                    .map((item: ShowType) => ({
+                        ...item,
+                        media_type: category,
+                        backdrop_path: `${imageUrlTemplate}${
+                            item.backdrop_path || item.poster_path
+                        }`,
+                    })),
+            };
+        }
+
+        return data;
+    }
+
+    return null;
+}
+
 export async function getImagePlaceholder(imageUrl: string) {
     const apiUrl = process.env.API_URL || 'http://localhost:3000/api/';
     const res = await fetch(`${apiUrl}base-64-converter?image_url=${imageUrl}`);

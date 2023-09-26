@@ -17,7 +17,8 @@ const BookmarkButton = ({ id, data }: Props) => {
     const bookmarks = useAppSelector(selectBookmarks);
     const [isBookmarked, setIsBookmarked] = useState(false);
 
-    const handleBookmark = () => {
+    const handleBookmark = (e: any) => {
+        e.preventDefault();
         dispatch(setBookmarks(data));
     };
 

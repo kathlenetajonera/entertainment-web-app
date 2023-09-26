@@ -20,14 +20,14 @@ function Bookmarks() {
                 <Section
                     title="Bookmarked Movies"
                     list={bookmarkedMovies}
-                    customClass="lg:mt- md:mt-24"
+                    customClass="mt-12 lg:mt-28 md:mt-24"
                 />
             )}
             {bookmarkedSeries.length > 0 && (
                 <Section
                     title="Bookmarked TV Series"
                     list={bookmarkedSeries}
-                    customClass="lg:mt-28 md:mt-24"
+                    customClass="mt-12 lg:mt-28 md:mt-24"
                 />
             )}
         </>
