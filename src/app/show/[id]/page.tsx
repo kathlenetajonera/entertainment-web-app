@@ -79,7 +79,7 @@ async function ShowPage({ params, searchParams }: Props) {
                     blurDataURL={base64Url}
                 />
                 <div className="pt-6">
-                    <div className="flex justify-between">
+                    <div className="flex justify-between md:flex-col-reverse">
                         <h2 className="text-2xl">{title || name}</h2>
 
                         {popularity && (
