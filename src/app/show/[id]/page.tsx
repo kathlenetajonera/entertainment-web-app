@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import {
     faFacebook,
     faInstagram,
@@ -104,9 +105,12 @@ async function ShowPage({ params, searchParams }: Props) {
                     )}
                     <div className="mt-3 flex items-center">
                         {genres.map(({ id, name }: any) => (
-                            <p className="py-1 px-3 border-[1px] border-white rounded-full text-sm mr-2 hover:bg-[rgba(255,255,255,0.1)] transition duration-300 cursor-pointer">
+                            <Link
+                                href={`/search?category=${category}&genre=${name}&genre_id=${id}`}
+                                className="py-1 px-3 border-[1px] border-white rounded-full text-sm mr-2 hover:bg-[rgba(255,255,255,0.1)] transition duration-300 cursor-pointer"
+                            >
                                 {name}
-                            </p>
+                            </Link>
                         ))}
                     </div>
                     <div className="mt-8">
