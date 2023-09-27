@@ -196,7 +196,7 @@ export async function fetchShow(id: string, category: string) {
 }
 
 export async function getImagePlaceholder(imageUrl: string) {
-    const apiUrl = process.env.API_URL || '/api/';
+    const apiUrl = `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`;
     const res = await fetch(`${apiUrl}base-64-converter?image_url=${imageUrl}`);
     const data = await res.json();
 
