@@ -11,7 +11,7 @@ function Loading() {
             {pathname === '/' && (
                 <>
                     <div className="w-64 h-[3.125rem] mt-5 bg-navbar"></div>
-                    <div className="flex mt-8 w-[calc(100%+1.9rem)] mb-14">
+                    <div className="flex mt-8 w-[calc(100%+1.8rem)] mb-14">
                         {...Array(4)
                             .fill(0)
                             .map((_, index) => (

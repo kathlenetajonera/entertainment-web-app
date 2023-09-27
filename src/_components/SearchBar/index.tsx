@@ -49,7 +49,7 @@ const SearchBar = ({
 
     return (
         <div
-            className={`bg-dark flex justify-between items-center sticky top-0 w-[calc(100%+1.9rem)] h-[3.125rem] pr-[1.9rem] z-50
+            className={`bg-dark flex justify-between items-center sticky top-0 w-[calc(100%+1.8rem)] h-[3.125rem] pr-[1.9rem] z-50
             lg:relative lg:pr-0 lg:w-full lg:top-24
             md:top-16 md:mt-4
             `}

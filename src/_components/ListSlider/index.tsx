@@ -41,7 +41,7 @@ const ListSlider = ({ children, className }: Props) => {
     };
 
     const config = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -60,7 +60,7 @@ const ListSlider = ({ children, className }: Props) => {
         </Slider>
     ) : (
         <>
-            <div className="flex mt-8 w-[calc(100%+1.9rem)] mt-5 mb-14 overflow-x-hidden md:w-[calc(100%+1.1rem)]">
+            <div className="flex mt-8 w-[calc(100%+1.8rem)] mt-5 mb-14 overflow-x-hidden md:w-[calc(100%+1.1rem)]">
                 {...Array(4)
                     .fill(0)
                     .map((_, index) => (

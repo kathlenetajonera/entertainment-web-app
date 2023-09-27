@@ -12,7 +12,7 @@ const HomeIcon = ({ href }: Props) => {
         <svg
             width="20"
             height="20"
-            className={`fill-inactive transition-fill duration-300 hover:fill-white ${
+            className={`mx-auto fill-inactive transition-fill duration-300 hover:fill-white ${
                 isActive ? 'fill-white' : ''
             }`}
         >

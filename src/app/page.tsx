@@ -24,7 +24,7 @@ export default async function Home() {
             <div className="mt-5 lg:mt-28 md:mt-24">
                 <SectionTitle>Trending</SectionTitle>
 
-                <ListSlider className="mt-8 w-[calc(100%+1.9rem)] md:w-[calc(100%+1.1rem)] md:mt-6">
+                <ListSlider className="mt-8 w-[calc(100%+1.8rem)] md:w-[calc(100%+1.1rem)] md:mt-6">
                     {trendingList.map((item: ShowType) => {
                         return (
                             <div key={item.id}>
