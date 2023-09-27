@@ -18,7 +18,7 @@ const MovieIcon = ({ href, customConfig }: Props) => {
         <svg
             width="20"
             height="20"
-            className={`mx-auto w-full fill-inactive transition-fill duration-300 hover:fill-white ${
+            className={`mx-auto fill-inactive transition-fill duration-300 hover:fill-white ${
                 isActive ? 'fill-white' : ''
             }`}
             viewBox="0 0 20 20"
