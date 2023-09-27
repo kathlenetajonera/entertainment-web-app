@@ -1,3 +1,4 @@
+'use client';
 import { usePathname } from 'next/navigation';
 
 type Props = {
@@ -6,10 +7,10 @@ type Props = {
 };
 
 const MovieIcon = ({ href, customConfig }: Props) => {
+    const pathname = usePathname();
     let isActive = true;
 
     if (href) {
-        const pathname = usePathname();
         isActive = pathname === href;
     }
 

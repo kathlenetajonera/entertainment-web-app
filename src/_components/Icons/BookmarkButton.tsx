@@ -25,7 +25,7 @@ const BookmarkButton = ({ id, data }: Props) => {
     useEffect(() => {
         const bookmarked = bookmarks.find((item) => item.id === id);
         setIsBookmarked(Boolean(bookmarked));
-    }, [bookmarks]);
+    }, [bookmarks, id]);
 
     return (
         <div

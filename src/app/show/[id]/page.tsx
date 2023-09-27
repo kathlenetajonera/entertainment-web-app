@@ -106,6 +106,7 @@ async function ShowPage({ params, searchParams }: Props) {
                     <div className="mt-3 flex items-center">
                         {genres.map(({ id, name }: any) => (
                             <Link
+                                key={id}
                                 href={`/search?category=${category}&genre=${name}&genre_id=${id}`}
                                 className="py-1 px-3 border-[1px] border-white rounded-full text-sm mr-2 hover:bg-[rgba(255,255,255,0.1)] transition duration-300 cursor-pointer"
                             >
@@ -119,7 +120,7 @@ async function ShowPage({ params, searchParams }: Props) {
                             {credits.map(({ label, value }) => {
                                 if (value) {
                                     return (
-                                        <p className="py-1">
+                                        <p key={label} className="py-1">
                                             {label}:{' '}
                                             <span className="font-extralight">
                                                 {value}
@@ -127,6 +128,8 @@ async function ShowPage({ params, searchParams }: Props) {
                                         </p>
                                     );
                                 }
+
+                                return <></>;
                             })}
                         </div>
                         <p>Share this via:</p>
@@ -149,8 +152,8 @@ async function ShowPage({ params, searchParams }: Props) {
                     <h3 className="text-xl">More like this</h3>
 
                     <div className="grid grid-cols-4 gap-10 mt-6 lg:grid-cols-2 md:grid-cols-1 md:gap-6">
-                        {data.similar.map((data: ShowType) => (
-                            <Card data={data} hideBookmark />
+                        {data.similar.map((data: ShowType, index: number) => (
+                            <Card key={index} data={data} hideBookmark />
                         ))}
                     </div>
                 </div>
