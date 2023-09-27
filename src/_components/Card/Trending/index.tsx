@@ -5,7 +5,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { ShowType } from '../types';
 import { extractData } from '../functions';
 import imagePlaceholder from '../../../../public/images/placeholder.png';
-import { getImagePlaceholder } from '@/_services/DataService';
+import { getServerImagePlaceholder } from '@/_services/DataService';
 import BookmarkButton from '@/_components/Icons/BookmarkButton';
 import MovieIcon from '@/_components/Icons/MovieIcon';
 import SeriesIcon from '@/_components/Icons/SeriesIcon';
@@ -30,7 +30,7 @@ const TrendingCard = async ({ data }: Props) => {
     let base64Url;
 
     if (hasImage) {
-        const { base64 } = await getImagePlaceholder(imageUrl as string);
+        const { base64 } = await getServerImagePlaceholder(imageUrl as string);
         base64Url = base64;
     }
 

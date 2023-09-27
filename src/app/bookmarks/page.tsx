@@ -2,7 +2,7 @@
 
 import { useAppSelector } from '@/_redux/hooks';
 import { selectBookmarks } from '@/_redux/features/bookmark/bookmarkSlice';
-import Section from '@/_components/Section';
+import ClientSection from '@/_components/Section/Client';
 import EmptyPlaceholder from '@/_components/EmptyPlaceholder';
 
 function Bookmarks() {
@@ -17,14 +17,14 @@ function Bookmarks() {
     return bookmarkedMovies.length > 0 || bookmarkedSeries.length > 0 ? (
         <>
             {bookmarkedMovies.length > 0 && (
-                <Section
+                <ClientSection
                     title="Bookmarked Movies"
                     list={bookmarkedMovies}
                     customClass="mt-12 lg:mt-28 md:mt-24"
                 />
             )}
             {bookmarkedSeries.length > 0 && (
-                <Section
+                <ClientSection
                     title="Bookmarked TV Series"
                     list={bookmarkedSeries}
                     customClass="mt-12 lg:mt-28 md:mt-24"

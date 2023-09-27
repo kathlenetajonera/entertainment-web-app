@@ -2,20 +2,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { getServerImagePlaceholder } from '@/_services/DataService';
-import { ShowType } from './types';
-import { extractData } from './functions';
-import imagePlaceholder from '../../../public/images/placeholder.png';
+import { ShowType } from '../types';
+import { extractData } from '../functions';
+import imagePlaceholder from '../../../../public/images/placeholder.png';
 import BookmarkButton from '@/_components/Icons/BookmarkButton';
 import MovieIcon from '@/_components/Icons/MovieIcon';
-import SeriesIcon from '../Icons/SeriesIcon';
+import SeriesIcon from '../../Icons/SeriesIcon';
 
 type Props = {
     data: ShowType;
     hideBookmark?: boolean;
 };
 
-const Card = async ({ data, hideBookmark }: Props) => {
+const ClientCard = async ({ data, hideBookmark }: Props) => {
     const {
         id,
         showTitle,
@@ -31,7 +30,11 @@ const Card = async ({ data, hideBookmark }: Props) => {
     let base64Url;
 
     if (hasImage) {
-        const { base64 } = await getServerImagePlaceholder(imageUrl as string);
+        const apiUrl = `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`;
+        const res = await fetch(
+            `${apiUrl}base-64-converter?image_url=${imageUrl}`
+        );
+        const { base64 } = await res.json();
         base64Url = base64;
     }
 
@@ -88,4 +91,4 @@ const Card = async ({ data, hideBookmark }: Props) => {
     );
 };
 
-export default Card;
+export default ClientCard;

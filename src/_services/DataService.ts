@@ -1,3 +1,4 @@
+import { getPlaiceholder } from 'plaiceholder';
 import { ShowType } from '@/_components/Card/types';
 import { networkRequest } from './helpers';
 import constants from '@/constants';
@@ -201,4 +202,20 @@ export async function getImagePlaceholder(imageUrl: string) {
     const data = await res.json();
 
     return data;
+}
+
+export async function getServerImagePlaceholder(imageUrl: string) {
+    const buffer = await fetch(imageUrl).then(async (res) =>
+        Buffer.from(await res.arrayBuffer())
+    );
+
+    const {
+        metadata: { height, width },
+        ...plaiceholder
+    } = await getPlaiceholder(buffer, { size: 10 });
+
+    return {
+        ...plaiceholder,
+        img: { imageUrl, height, width },
+    };
 }
