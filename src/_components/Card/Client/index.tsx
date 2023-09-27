@@ -30,7 +30,7 @@ const ClientCard = async ({ data, hideBookmark }: Props) => {
     let base64Url;
 
     if (hasImage) {
-        const apiUrl = `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`;
+        const apiUrl = `/api/`;
         const res = await fetch(
             `${apiUrl}base-64-converter?image_url=${imageUrl}`
         );
